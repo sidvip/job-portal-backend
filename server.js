@@ -5,8 +5,8 @@ const express = require("express");
 const process = require("process");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const initializeModels = require("./database/model-initializer");
 const ENV = process.env.NODE_ENV;
+const initializeModels = require("./database/model-initializer");
 const { jobSeed, userSeed } = require("./database/seeder");
 const jobRouter = require("./routes/jobs/jobs");
 const userRouter = require("./routes/users/users");
@@ -20,8 +20,6 @@ const {
     .config({ path: ENV_PATH });
 
 // Logging the Express route calls
-const LOG_DIR = path.resolve(__dirname, "logs", "all.log");
-const accessLogStream = fs.createWriteStream(LOG_DIR, { flags: "a" });
 
 const app = express();
 
@@ -33,7 +31,7 @@ const CORS_OPTIONS = {
 app.use(cors(CORS_OPTIONS));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(logger("combined", { stream: accessLogStream }));
+app.use(logger("combined"));
 
 
 // Initialize the Models inside table
@@ -51,8 +49,6 @@ app.use(userRouter);
 app.use(/* eslint-disable global-require */
 
     (err, req, res, next) => {
-        const errLogger = require("node-logger")
-            .createLogger(path.resolve(__dirname, "..", "logs", "error.log"));
         const msg = `\n--------------------------------\npath: ${req.originalUrl}
         \nbody: ${JSON.stringify(req?.body || {})}\n
         methods: ${JSON.stringify(req?.route?.methods || {})}\n
