@@ -11,6 +11,7 @@
 
 # Caution 
 1. In case the port is updated for frontend code, please update it inside the `server.js` **CORS** options.
+2. Install `nodemon` in the machine locally or globally to run the server
 
 # Development Setup
 
