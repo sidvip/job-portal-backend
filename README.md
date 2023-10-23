@@ -2,11 +2,15 @@
 
 # Database Setup
 
-1. Run `create-db.sql` inside database
+1. Run `create-db.sql` inside the database
 2. Initialize the table by uncommenting the following line inside `server.js`
     > `initializeModels`
 3. Seed the database by uncommenting the line 41
-4. Once the job is applied entry will be created inside `job-user` table
+4. Once the job is applied entry will be created inside the `job-user` table
+5. Update your password inside the `.env` file
+
+# Caution 
+1. In case the port is updated for frontend code, please update it inside the `server.js` **CORS** options.
 
 # Development Setup
 
